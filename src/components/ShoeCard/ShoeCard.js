@@ -34,22 +34,20 @@ const ShoeCard = ({
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
-        <ImageWrapper>
-          <Image alt="" src={imageSrc} />
+        <ImageAndFlagWrapper>
+          <ImageWrapper>
+            <Image alt='' src={imageSrc} />
+          </ImageWrapper>
           {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
-          )}
-        </ImageWrapper>
+          {variant === 'new-release' && <NewFlag>Just released!</NewFlag>}
+        </ImageAndFlagWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
           <Price
             style={{
               '--color':
-                variant === 'on-sale'
-                  ? 'var(--color-gray-700)'
-                  : undefined,
+                variant === 'on-sale' ? 'var(--color-gray-700)' : undefined,
               '--text-decoration':
                 variant === 'on-sale' ? 'line-through' : undefined,
             }}
@@ -75,13 +73,32 @@ const Link = styled.a`
 
 const Wrapper = styled.article``;
 
-const ImageWrapper = styled.div`
+const ImageAndFlagWrapper = styled.div`
   position: relative;
+`;
+
+const ImageWrapper = styled.div`
+  overflow: hidden;
+  border-radius: 16px 16px 4px 4px;
+
+  // Get rid of the so-called magic space at the bottom
+  line-height: 0;
 `;
 
 const Image = styled.img`
   width: 100%;
-  border-radius: 16px 16px 4px 4px;
+  border-radius: inherit;
+  transition: transform ease-out 350ms;
+
+  --optical-shoe-center: 55% 75%;
+  transform-origin: var(--optical-shoe-center);
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${ImageAndFlagWrapper}:hover & {
+      transform: scale(1.1);
+      transition-duration: 125ms;
+    }
+  }
 `;
 
 const Row = styled.div`
@@ -121,6 +138,16 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+  transition: transform ease-out 350ms, filter ease-out 350ms;
+  transform-origin: top right;
+
+  @media (prefers-reduced-motion: no-preference) {
+    ${ImageAndFlagWrapper}:hover & {
+      transition-duration: 125ms;
+      transform: scale(0.8);
+      filter: saturate(150%);
+    }
+  }
 `;
 
 const SaleFlag = styled(Flag)`
