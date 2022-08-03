@@ -20,24 +20,28 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLinkWithFlipUpEffect href='/sale'>Sale</NavLinkWithFlipUpEffect>
+          <NavLinkWithFlipUpEffect href='/new'>
+            New&nbsp;Releases
+          </NavLinkWithFlipUpEffect>
+          <NavLinkWithFlipUpEffect href='/men'>Men</NavLinkWithFlipUpEffect>
+          <NavLinkWithFlipUpEffect href='/women'>Women</NavLinkWithFlipUpEffect>
+          <NavLinkWithFlipUpEffect href='/kids'>Kids</NavLinkWithFlipUpEffect>
+          <NavLinkWithFlipUpEffect href='/collections'>
+            Collections
+          </NavLinkWithFlipUpEffect>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
-            <Icon id="shopping-bag" />
+            <Icon id='shopping-bag' />
             <VisuallyHidden>Open cart</VisuallyHidden>
           </ShoppingBagButton>
           <UnstyledButton>
-            <Icon id="search" />
+            <Icon id='search' />
             <VisuallyHidden>Search</VisuallyHidden>
           </UnstyledButton>
           <UnstyledButton onClick={() => setShowMobileMenu(true)}>
-            <Icon id="menu" />
+            <Icon id='menu' />
             <VisuallyHidden>Open menu</VisuallyHidden>
           </UnstyledButton>
         </MobileActions>
@@ -125,5 +129,53 @@ const NavLink = styled.a`
     color: var(--color-secondary);
   }
 `;
+
+const FlippableNavLink = styled(NavLink)`
+  overflow: hidden;
+  position: relative;
+`;
+
+const FlippableNavLinkFixedText = styled.span`
+  @media (prefers-reduced-motion: no-preference) {
+    transition: opacity 0s ease-out 175ms;
+
+    ${NavLink}:hover &, ${NavLink}:focus-visible & {
+      opacity: 0;
+      transition-delay: 0ms;
+    }
+  }
+`;
+
+const FlippableNavLinkFlippedTexts = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 175ms ease-out;
+
+    ${NavLink}:hover &, ${NavLink}:focus-visible & {
+      transform: translateY(-50%);
+    }
+  }
+
+  > :last-child {
+    font-weight: 700;
+  }
+`;
+
+const NavLinkWithFlipUpEffect = ({ href, children }) => {
+  return (
+    <FlippableNavLink href={href}>
+      <FlippableNavLinkFixedText>{children}</FlippableNavLinkFixedText>
+      <FlippableNavLinkFlippedTexts aria-hidden='true'>
+        <span>{children}</span>
+        <span>{children}</span>
+      </FlippableNavLinkFlippedTexts>
+    </FlippableNavLink>
+  );
+};
 
 export default Header;
