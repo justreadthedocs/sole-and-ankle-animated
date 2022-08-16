@@ -1,5 +1,7 @@
 # Sole&Ankle, Animated — Module 8 workshop
 
+[Click to jump to GIFs of the submitted solutions](#submitted-solutions)
+
 Once again, we're working on the sneaker store!
 
 ![A screenshot of the original Flexbox module workshop](./docs/original-desktop.png)
@@ -87,3 +89,21 @@ Here are some ideas:
 - Experiment with different orchestrations, animating different elements at different times
 - Use a 3D transform on the drawer so that it swings in like a door closing rather than sliding in from offscreen
 - Instead of fading in all of the drawer's contents at once, add a staggered fade to the individual navigation links so that they fade in one by one, from the top down
+
+---
+
+## Submitted solutions
+
+### Exercise 1
+![Submitted solution for exercise 1](./docs/submitted_solutions/1.gif)
+
+### Exercise 2
+
+#### Flip-up effect
+![Submitted solution for exercise 2 - Flip-up effect](./docs/submitted_solutions/2-1.gif)
+
+#### Aura effect (similar to the one from [Creative Link Effects](https://tympanus.net/Development/CreativeLinkEffects/))
+![Submitted solution for exercise 2 - Aura effect](./docs/submitted_solutions/2-2.gif)
+
+### Exercise 3
+![Submitted solution for exercise 3](./docs/submitted_solutions/3.gif)
