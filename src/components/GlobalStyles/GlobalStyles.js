@@ -79,6 +79,8 @@ html {
 
   --color-backdrop: hsl(${COLORS.gray[700]} / 0.8);
 
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+
   /*
     Silence the warning about missing Reach Dialog styles
   */
